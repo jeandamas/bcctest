@@ -9,145 +9,342 @@
 </head>
 
 <body>
-    <h1>DAY 01: WED 22nd Sept 2021</h1>
-<p id="day1.1"></p>
-    <p>Welcome to BCC Address</p>
-    <hr>
-    <script>
-        const day1_1 = new Date(1632310200000);
-        const day_1_1 = day1_1.getHours() + ":" + day1_1.getMinutes();
-        document.getElementById("day1.1").innerHTML = day_1_1;
-    </script>
+    <style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap");
 
-    <p id="day1.2"></p>
-    <p>Community Connect</p>
-    <hr>
-    <script>
-        const day1_2 = new Date(1632311100000);
-        const day_1_2 = day1_2.getHours() + ":" + day1_2.getMinutes();
-        document.getElementById("day1.2").innerHTML = day_1_2;
-    </script>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-    <p id="day1.3"></p>
-    <p>Break - (virtual wildlife economy tour screenings)</p>
-    <hr>
-    <script>
-        const day1_3 = new Date(1632313800000);
-        const day_1_3 = day1_3.getHours() + ":" + day1_3.getMinutes();
-        document.getElementById("day1.3").innerHTML = day_1_3;
-    </script>
+    html {
+        font-family: "Montserrat";
+    }
 
-    <p id="day1.4"></p>
-    <p>Seminal Discussions</p>
-    <hr>
-    <script>
-        const day1_4 = new Date(1632314400000);
-        const day_1_4 = day1_4.getHours() + ":" + day1_4.getMinutes();
-        document.getElementById("day1.4").innerHTML = day_1_4;
-    </script>
+    .thecontainer {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 0;
+        background-color: #022C43;
+    }
 
-    <p id="day1.5"></p>
-    <p>Break - (virtual wildlife economy tour screenings)</p>
-    <hr>
-    <script>
-        const day1_5 = new Date(1632317400000);
-        const day_1_5 = day1_5.getHours() + ":" + day1_5.getMinutes();
-        document.getElementById("day1.5").innerHTML = day_1_5;
-    </script>
+    .timeline {
+        width: 80%;
+        height: auto;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+    }
 
-    <p id="day1.6"></p>
-    <p>Business of Conservation Conference: Hot Topics</p>
-    <hr>
-    <script>
-        const day1_6 = new Date(1632318000000);
-        const day_1_6 = day1_6.getHours() + ":" + day1_6.getMinutes();
-        document.getElementById("day1.6").innerHTML = day_1_6;
-    </script>
+    .timeline ul {
+        list-style: none;
+    }
 
-    <p id="day1.7"></p>
-    <p>Daily Debrief</p>
-    <hr>
-    <script>
-        const day1_7 = new Date(1632320100000);
-        const day_1_7 = day1_7.getHours() + ":" + day1_7.getMinutes();
-        document.getElementById("day1.7").innerHTML = day_1_7;
-    </script>
+    .timeline ul li {
+        padding: 15px;
+        background-color: white;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
 
-    <p id="day1.8"></p>
-    <p>END</p>
-    <hr>
-    <script>
-        const day1_8 = new Date(1632321000000);
-        const day_1_8 = day1_8.getHours() + ":" + day1_8.getMinutes();
-        document.getElementById("day1.8").innerHTML = day_1_8;
-    </script>
+    .timeline ul li:last-child {
+        margin-bottom: 0;
+    }
 
-    <!-- DAY 2  DAY 2  DAY 2  DAY 2  DAY 2  DAY 2  DAY 2  DAY 2 -->
-    
-    
-    
-    
-    
-    
-    <h1>DAY 02: Thur 23rd Sept 2021</h1>
-    
-    <p id="day2.1"></p>
-    <p>Check-in and Day 2 Opening</p><hr>
-    <script>
-        const day2_1 = new Date(1632396600000);
-        const day_2_1 = day2_1.getHours() + ":" + day2_1.getMinutes();
-        document.getElementById("day2.1").innerHTML = day_2_1;
-    </script>
+    .timeline-content h1 {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 15px;
+        margin-bottom: 10px;
+    }
+
+    .timeline-content p {
+        font-size: 16px;
+        line-height: 30px;
+        font-weight: 300;
+    }
+
+    .timeline-content .date {
+        font-size: 12px;
+        font-weight: 300;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+        color: white;
+    }
+
+    @media only screen and (min-width: 768px) {
+        .timeline:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: #FAB500;
+        }
+
+        .timeline ul li {
+            width: 50%;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline ul li:nth-child(odd) {
+            float: left;
+            clear: right;
+            transform: translateX(-30px);
+            border-radius: 20px 0px 20px 20px;
+        }
+
+        .timeline ul li:nth-child(even) {
+            float: right;
+            clear: left;
+            transform: translateX(30px);
+            border-radius: 0px 20px 20px 20px;
+        }
+
+        .timeline ul li::before {
+            content: "";
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: #00A585;
+            top: 0px;
+        }
+
+        .timeline ul li:nth-child(odd)::before {
+            transform: translate(50%, -50%);
+            right: -30px;
+        }
+
+        .timeline ul li:nth-child(even)::before {
+            transform: translate(-50%, -50%);
+            left: -30px;
+        }
+
+        .timeline-content .date {
+            position: absolute;
+            top: -30px;
+        }
+
+        .timeline ul li:hover::before {
+            background-color: #FAB500;
+        }
+    }
+</style>
+
+<div class="thecontainer">
+    <div class="timeline">
+        <ul>
+            <!-- =========== DAY 1 ========== -->
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">22nd Sept, 2021</h3>
+                    <h1>Welcome to BCC Address</h1>
+                    <p id="day1.1"></p>
+                </div>
+            </li>
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">22nd Sept, 2021</h3>
+                    <h1>Community Connect</h1>
+                    <p id="day1.2"></p>
+                </div>
+            </li>
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">22nd Sept, 2021</h3>
+                    <h1>Break - (virtual wildlife economy tour screenings)</h1>
+                    <p id="day1.3"></p>
+                </div>
+            </li>
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">22nd Sept, 2021</h3>
+                    <h1>Seminal Discussions</h1>
+                    <p id="day1.4"></p>
+                </div>
+            </li>
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">22nd Sept, 2021</h3>
+                    <h1>Break - (virtual wildlife economy tour screenings)</h1>
+                    <p id="day1.5"></p>
+                </div>
+            </li>
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">22nd Sept, 2021</h3>
+                    <h1>Business of Conservation Conference: Hot Topics</h1>
+                    <p id="day1.6"></p>
+                </div>
+            </li>
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">22nd Sept, 2021</h3>
+                    <h1>Daily Debrief</h1>
+                    <p id="day1.7"></p>
+                </div>
+            </li>
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">22nd Sept, 2021</h3>
+                    <h1>End of day 01</h1>
+                    <p id="day1.8"></p>
+                </div>
+            </li>
 
 
-    <p id="day2.2"></p>
-    <p>Big 5’ Wildlife Economy Activity Workshops</p><hr>
-    <script>
-        const day2_2 = new Date(1632397500000);
-        const day_2_2 = day2_2.getHours() + ":" + day2_2.getMinutes();
-        document.getElementById("day2.2").innerHTML = day_2_2;
-    </script>
 
-<p id="day2.3"></p>
-<p>Break - (virtual wildlife economy tour screenings)</p><hr>
-    <script>
-        const day2_3 = new Date(1632400200000);
-        const day_2_3 = day2_3.getHours() + ":" + day2_3.getMinutes();
-        document.getElementById("day2.3").innerHTML = day_2_3;
-    </script>
 
-<p id="day2.4"></p>
-    <p>SOWC/LHI/WWF Incubator Demo Day Pitches</p><hr>
-    <script>
-        const day2_4 = new Date(1632400800000);
-        const day_2_4 = day2_4.getHours() + ":" + day2_4.getMinutes();
-        document.getElementById("day2.4").innerHTML = day_2_4;
-    </script>
+            <!-- =========== DAY 2 ========== -->
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">23rd Sept, 2021</h3>
+                    <h1>Check-in and Day 2 Opening</h1>
+                    <p id="day2.1"></p>
+                </div>
+            </li>
 
-<p id="day2.5"></p>
-    <p>Break - (virtual wildlife economy tour screenings)</p><hr>
-    <script>
-        const day2_5 = new Date(1632403200000);
-        const day_2_5 = day2_5.getHours() + ":" + day2_5.getMinutes();
-        document.getElementById("day2.5").innerHTML = day_2_5;
-    </script>
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">23rd Sept, 2021</h3>
+                    <h1>‘Big 5’ Wildlife Economy Activity Workshops</h1>
+                    <p id="day2.2"></p>
+                </div>
+            </li>
 
-<p id="day2.6"></p>
-    <p>Closing Plenary</p><hr>
-    <script>
-        const day2_6 = new Date(1632404400000);
-        const day_2_6 = day2_6.getHours() + ":" + day2_6.getMinutes();
-        document.getElementById("day2.6").innerHTML = day_2_6;
-    </script>
 
-<p id="day2.7"></p>
-    <p>END</p><hr>
-    <script>
-        const day2_7 = new Date(1632407100000);
-        const day_2_7 = day2_7.getHours() + ":" + day2_7.getMinutes();
-        document.getElementById("day2.7").innerHTML = day_2_7;
-    </script>
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">23rd Sept, 2021</h3>
+                    <h1>Break - (virtual wildlife economy tour screenings)</h1>
+                    <p id="day2.3"></p>
+                </div>
+            </li>
 
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">23rd Sept, 2021</h3>
+                    <h1>SOWC/LHI/WWF Incubator Demo Day Pitches</h1>
+                    <p id="day2.4"></p>
+                </div>
+            </li>
+
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">23rd Sept, 2021</h3>
+                    <h1>Break - (virtual wildlife economy tour screenings)</h1>
+                    <p id="day2.5"></p>
+                </div>
+            </li>
+
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">23rd Sept, 2021</h3>
+                    <h1>Closing Plenary</h1>
+                    <p id="day2.6"></p>
+                </div>
+            </li>
+
+
+            <li>
+                <div class="timeline-content">
+                    <h3 class="date">23rd Sept, 2021</h3>
+                    <h1> ~End~</h1>
+                    <p id="day2.7"></p>
+                </div>
+            </li>
+
+
+
+
+
+        </ul>
+    </div>
+</div>
+
+<script>
+    const day1_1 = new Date(1632310200000);
+    const day_1_1 = day1_1.getHours() + ":" + day1_1.getMinutes();
+    document.getElementById("day1.1").innerHTML = day_1_1;
+
+    const day1_2 = new Date(1632311100000);
+    const day_1_2 = day1_2.getHours() + ":" + day1_2.getMinutes();
+    document.getElementById("day1.2").innerHTML = day_1_2;
+
+    const day1_3 = new Date(1632313800000);
+    const day_1_3 = day1_3.getHours() + ":" + day1_3.getMinutes();
+    document.getElementById("day1.3").innerHTML = day_1_3;
+
+    const day1_4 = new Date(1632314400000);
+    const day_1_4 = day1_4.getHours() + ":" + day1_4.getMinutes();
+    document.getElementById("day1.4").innerHTML = day_1_4;
+
+    const day1_5 = new Date(1632317400000);
+    const day_1_5 = day1_5.getHours() + ":" + day1_5.getMinutes();
+    document.getElementById("day1.5").innerHTML = day_1_5;
+
+    const day1_6 = new Date(1632318000000);
+    const day_1_6 = day1_6.getHours() + ":" + day1_6.getMinutes();
+    document.getElementById("day1.6").innerHTML = day_1_6;
+
+    const day1_7 = new Date(1632320100000);
+    const day_1_7 = day1_7.getHours() + ":" + day1_7.getMinutes();
+    document.getElementById("day1.7").innerHTML = day_1_7;
+
+    const day1_8 = new Date(1632321000000);
+    const day_1_8 = day1_8.getHours() + ":" + day1_8.getMinutes();
+    document.getElementById("day1.8").innerHTML = day_1_8;
+
+    const day2_1 = new Date(1632396600000);
+    const day_2_1 = day2_1.getHours() + ":" + day2_1.getMinutes();
+    document.getElementById("day2.1").innerHTML = day_2_1;
+
+    const day2_2 = new Date(1632397500000);
+    const day_2_2 = day2_2.getHours() + ":" + day2_2.getMinutes();
+    document.getElementById("day2.2").innerHTML = day_2_2;
+
+
+    const day2_3 = new Date(1632400200000);
+    const day_2_3 = day2_3.getHours() + ":" + day2_3.getMinutes();
+    document.getElementById("day2.3").innerHTML = day_2_3;
+
+
+    const day2_4 = new Date(1632400800000);
+    const day_2_4 = day2_4.getHours() + ":" + day2_4.getMinutes();
+    document.getElementById("day2.4").innerHTML = day_2_4;
+
+    const day2_5 = new Date(1632403200000);
+    const day_2_5 = day2_5.getHours() + ":" + day2_5.getMinutes();
+    document.getElementById("day2.5").innerHTML = day_2_5;
+
+
+    const day2_6 = new Date(1632404400000);
+    const day_2_6 = day2_6.getHours() + ":" + day2_6.getMinutes();
+    document.getElementById("day2.6").innerHTML = day_2_6;
+
+
+    const day2_7 = new Date(1632407100000);
+    const day_2_7 = day2_7.getHours() + ":" + day2_7.getMinutes();
+    document.getElementById("day2.7").innerHTML = day_2_7;
+</script>
 </body>
 
 </html>
