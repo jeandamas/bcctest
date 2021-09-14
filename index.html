@@ -1,360 +1,604 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCC 2021 Agenda</title>
-</head>
-
-<body><style>
-    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap");
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    html {
-        font-family: "Montserrat";
-    }
-
-    .thecontainer {
-        min-height: 100vh;
+<style>
+    .accordion {
+        background-color: #022c43;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 100px 0;
-        background-color: #022C43;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
     }
 
-    .timeline {
-        width: 80%;
-        height: auto;
-        max-width: 800px;
-        margin: 0 auto;
-        position: relative;
+    .accordion:after {
+        content: '\002B';
+        color: white;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
     }
 
-    .timeline ul {
-        list-style: none;
+    .active:after {
+        content: "\2212";
     }
 
-    .timeline ul li {
-        padding: 15px;
-        background-color: white;
-        border-radius: 10px;
-        margin-bottom: 20px;
+    .childaccordion {
+        background-color: #114c4b;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
     }
 
-    .timeline ul li:last-child {
-        margin-bottom: 0;
+    .childaccordion:after {
+        content: '\002B';
+        color: white;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
     }
 
-    .timeline-content h1 {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 20px;
-        margin-bottom: 10px;
+    .activechild:after {
+        content: "\2212";
     }
 
-    .timeline-content p {
-        font-size: 16px;
-        line-height: 30px;
-        font-weight: 300;
-    }
-
-    .timeline-content .date {
-        font-size: 12px;
-        font-weight: 300;
-        margin-bottom: 10px;
-        letter-spacing: 2px;
+    .time {
+        display: inline;
         color: white;
     }
 
-    @media only screen and (min-width: 300px) {
-        .timeline:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background-color: #FAB500;
-        }
+    .active {
+        background-color: #022C43DA;
+    }
 
-        .timeline ul li {
-            width: 50%;
-            position: relative;
-            margin-bottom: 50px;
-        }
+    .activechild {
+        background-color: #00a69c
+    }
 
-        .timeline ul li:nth-child(odd) {
-            float: left;
-            clear: right;
-            transform: translateX(-30px);
-            border-radius: 20px 0px 20px 20px;
-        }
+    .accordion:hover {
+        background-color: #00A584DE;
+    }
 
-        .timeline ul li:nth-child(even) {
-            float: right;
-            clear: left;
-            transform: translateX(30px);
-            border-radius: 0px 20px 20px 20px;
-        }
+    .childaccordion:hover {
+        background-color: #00A1B6;
+    }
+
+    .panel {
+        /* padding: 0 18px; */
+        transition: max-height 0.5s ease-out;
+        padding: 0;
+        display: none;
+        background-color: white;
+        overflow: hidden;
+        margin-bottom: 3px;
+        transition: max-height 0.2s ease-out;
+    }
+
+    .panel p {
+        padding: 0 10px;
+    }
+
+    .childpanel p {
+        padding: 0 10px;
+    }
+
+    .childpanel {
+        /* padding: 0 18px; */
+        transition: max-height 0.5s ease-out;
+        padding: 0;
+        display: none;
+        background-color: white;
+        overflow: hidden;
+        margin-bottom: 3px;
+        width: 100%;
+
+    }
+
+    .thecontainer {
+        width: 100%;
+        margin: auto;
+    }
 
 
-        .timeline ul li::before {
-            content: "";
-            position: absolute;
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            background-color: #00A585;
-            top: 0px;
-        }
-        .timeline ul li:nth-child(n+9):before {
-            content: "";
-            position: absolute;
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            background-color: #EC6607;
-            top: 0px;
-        }
-
-        .timeline ul li:nth-child(odd)::before {
-            transform: translate(50%, -50%);
-            right: -30px;
-        }
-
-        .timeline ul li:nth-child(even)::before {
-            transform: translate(-50%, -50%);
-            left: -30px;
-        }
-
-        .timeline-content .date {
-            position: absolute;
-            top: -30px;
-        }
-
-        .timeline ul li:hover::before {
-            background-color: white;
-        }
+    /* ============ */
+    .speakers {
+        margin: 0;
+        padding: 0;
+        width: 100%;
     }
 </style>
 
 <div class="thecontainer">
-    <div class="timeline">
-        <ul>
-            <!-- =========== DAY 1 ========== -->
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">22nd Sept, 2021</h3>
-                    <h1><b>Day 01: </b>Welcome to BCC Address</h1>
-                    <p id="day1.1"></p>
-                </div>
-            </li>
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">22nd Sept, 2021</h3>
-                    <h1>Community Connect</h1>
-                    <p id="day1.2"></p>
-                </div>
-            </li>
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">22nd Sept, 2021</h3>
-                    <h1>Break - (virtual wildlife economy tour screenings)</h1>
-                    <p id="day1.3"></p>
-                </div>
-            </li>
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">22nd Sept, 2021</h3>
-                    <h1>Seminal Discussions</h1>
-                    <p id="day1.4"></p>
-                </div>
-            </li>
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">22nd Sept, 2021</h3>
-                    <h1>Break - (virtual wildlife economy tour screenings)</h1>
-                    <p id="day1.5"></p>
-                </div>
-            </li>
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">22nd Sept, 2021</h3>
-                    <h1>Business of Conservation Conference: Hot Topics</h1>
-                    <p id="day1.6"></p>
-                </div>
-            </li>
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">22nd Sept, 2021</h3>
-                    <h1>Daily Debrief</h1>
-                    <p id="day1.7"></p>
-                </div>
-            </li>
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">22nd Sept, 2021</h3>
-                    <h1>End of day 01</h1>
-                    <p id="day1.8"></p>
-                </div>
-            </li>
+    <h2> TIMEZONE SENSITIVE AGENDA</h2>
+    <h4>Day 01</h4>
 
 
 
-
-
-            <!-- =========== DAY 2 ========== -->
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">23rd Sept, 2021</h3>
-                    <h1><b>DAY 02: </b>Check-in and Day 2 Opening</h1>
-                    <p id="day2.1"></p>
-                </div>
-            </li>
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">23rd Sept, 2021</h3>
-                    <h1>‘Big 5’ Wildlife Economy Activity Workshops</h1>
-                    <p id="day2.2"></p>
-                </div>
-            </li>
-
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">23rd Sept, 2021</h3>
-                    <h1>Break - (virtual wildlife economy tour screenings)</h1>
-                    <p id="day2.3"></p>
-                </div>
-            </li>
-
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">23rd Sept, 2021</h3>
-                    <h1>SOWC/LHI/WWF Incubator Demo Day Pitches</h1>
-                    <p id="day2.4"></p>
-                </div>
-            </li>
-
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">23rd Sept, 2021</h3>
-                    <h1>Break - (virtual wildlife economy tour screenings)</h1>
-                    <p id="day2.5"></p>
-                </div>
-            </li>
-
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">23rd Sept, 2021</h3>
-                    <h1>Closing Plenary</h1>
-                    <p id="day2.6"></p>
-                </div>
-            </li>
-
-
-            <li>
-                <div class="timeline-content">
-                    <h3 class="date">23rd Sept, 2021</h3>
-                    <h1> ~End~</h1>
-                    <p id="day2.7"></p>
-                </div>
-            </li>
-
-
-
-
-
-        </ul>
+    <!-- DAY 1 SESSION 1 -->
+    <!-- parent accordion -->
+    <button class="accordion">
+        <b>Welcome to BCC Address | Time: <p class="time" id="day1.1"></p></b>
+    </button>
+    <div class="panel">
+        <p>The conference will open with welcome remarks from representatives of the Government of Rwanda including Mr.
+            Zephanie Niyonkuru and the CEO/Founder of the African Leadership Group and the ALU School of Wildlife
+            Conservation, Fred Swaniker.</p>
     </div>
-</div>
+    <!-- DAY 1 SESSION 2 -->
+    <!-- parent accordion -->
+    <button class="accordion">
+        <b>Community Connect | Time: <p class="time" id="day1.2"></p></b>
+    </button>
+    <div class="panel">
+        <p>A fun and interactive session where you will get to connect with the conservation community through a ‘speed
+            dating’ activity. Community Connect is an opportunity to network & connect with like-minded leaders, and
+            learn about the African Wildlife Economy from a shared perspective.</p>
+    </div>
 
-<script>
-    const day1_1 = new Date(1632310200000);
-    const day_1_1 = day1_1.getHours() + ":" + day1_1.getMinutes();
-    document.getElementById("day1.1").innerHTML = day_1_1;
+    <!-- DAY 1 SESSION 3 BREAK -->
+    <!-- parent accordion -->
+    <button class="accordion">
+        <b>Break | Time: <p class="time" id="day1.3"></p></b>
+    </button>
+    <div class="panel">
+    </div>
 
-    const day1_2 = new Date(1632311100000);
-    const day_1_2 = day1_2.getHours() + ":" + day1_2.getMinutes();
-    document.getElementById("day1.2").innerHTML = day_1_2;
+    <!-- DAY 1 SESSION 4 -->
+    <!-- parent accordion -->
+    <button class="accordion">
+        <b>Seminal Discussions | Time: <p class="time" id="day1.4"></p></b>
+    </button>
+    <div class="panel">
+        <p>Seminal Discussions are a facilitated session where groups engage in a discussion about the State of the
+            Wildlife Economy in Africa, discuss some of the insights gained from the full Wildlife Economy and the
+            Roadmap for Africa’s Wildlife Economy reports, and collectively design a solution for building resilient
+            wildlife economies.</p>
+    </div>
 
-    const day1_3 = new Date(1632313800000);
-    const day_1_3 = day1_3.getHours() + ":" + day1_3.getMinutes();
-    document.getElementById("day1.3").innerHTML = day_1_3;
+    <!-- DAY 1 SESSION 5 BREAK -->
+    <!-- parent accordion -->
+    <button class="accordion">
+        <b>Break | Time: <p class="time" id="day1.5"></p></b>
+    </button>
+    <div class="panel">
+    </div>
 
-    const day1_4 = new Date(1632314400000);
-    const day_1_4 = day1_4.getHours() + ":" + day1_4.getMinutes();
-    document.getElementById("day1.4").innerHTML = day_1_4;
+    <!-- DAY 1 SESSION 6 -->
+    <!-- PARENT ACCORDION -->
+    <button class="accordion">
+        <b>Business of Conservation Conference: Hot Topics | Time: <p class="time" id="day1.6"></p></b>
+    </button>
+    <!-- ACCORDION CONTENT -->
+    <div class="panel">
+        <!-- ABOUT PARENT ACCORDION SESSION -->
+        <p>Join us for a round of parallel sessions to discuss hot topics in the conservation sector that have the
+            potential to impact on the resilience of Africa’s Wildlife Economy.</p>
+        <!-- CHILD ACCORDION 1 -->
+        <button class="childaccordion ">Breakout Room 1: Gamifying Nature Conservation</button>
+        <div class="childpanel">
+            <p>Could games and gamification help reach new audiences and build a new community of millions who feel
+                engaged in conservation? This session is led by the Luc Hoffmann Institute and Internet of Elephants and
+                will seek to answer this question and discuss ways to generate new revenue streams for conservation by
+                monetising wildlife data.</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Gamifying-Nature-Conservation.png"
+                alt="Session Speakers">
+        </div>
+        <!-- CHILD ACCORDION 2 -->
+        <button class="childaccordion ">Breakout Room 2: Circular Economy and biodiversity</button>
+        <div class="childpanel">
+            <p>Circular economy is now a buzz word but what does it really entail? Join the Ellen MacArthur Foundation
+                to engage on practical ways the circular economy can play a fundamental role in helping halt and reverse
+                global biodiversity loss.</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Circular_Economy.png"
+                alt="Session Speakers">
+        </div>
 
-    const day1_5 = new Date(1632317400000);
-    const day_1_5 = day1_5.getHours() + ":" + day1_5.getMinutes();
-    document.getElementById("day1.5").innerHTML = day_1_5;
+        <!-- CHILD ACCORDION 3 -->
+        <button class="childaccordion ">Breakout Room 3: Rangeland carbon – the new kid on the block! </button>
+        <div class="childpanel">
+            <p>Marketable rangeland carbon is still in its infancy but is quickly gaining significant interest. This
+                session will provide an overview of the approach, methods and opportunities this presents to the African
+                continent.</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Rangerland-Carbon.png"
+                alt="Session Speakers">
+        </div>
 
-    const day1_6 = new Date(1632318000000);
-    const day_1_6 = day1_6.getHours() + ":" + day1_6.getMinutes();
-    document.getElementById("day1.6").innerHTML = day_1_6;
+        <!-- CHILD ACCORDION 4 -->
+        <button class="childaccordion ">Breakout room 4: Technical innovations for engagement and enrichment</button>
+        <div class="childpanel">
+            <p>We are currently in an era where very little of our daily lives are not impacted—directly or indirectly—
+                by technology. Integrations and the interoperability of technological systems, services and advancements
+                in earth observation, the onset of the Internet of Things, distributed ledgers and our mobile devices
+                hold a rich potential to transform the way we deal with environmental challenges. Never has there been
+                such innovation and enabling factors as we now experience to help us better understand our world and the
+                natural resources we rely on, and how we as humans could better engage as custodians. ‘Digital
+                Transformation’, ‘Disruption’ and ‘The 4th Industrial Revolution’ are terms so often bandied about, but
+                what do these mean? More importantly, what do they mean for the wildlife economy?</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Technical-Innovations.png"
+                alt="Session Speakers">
+        </div>
 
-    const day1_7 = new Date(1632320100000);
-    const day_1_7 = day1_7.getHours() + ":" + day1_7.getMinutes();
-    document.getElementById("day1.7").innerHTML = day_1_7;
+        <!-- CHILD ACCORDION 5 -->
+        <button class="childaccordion ">Breakout room 5: Sustainable financing for conservation in Africa</button>
+        <div class="childpanel">
+            <p>How can we unlock the wildlife economy to promote sustainable financing for conservation in Africa? This
+                session will look at this as well as include discussions on other innovative funding and financing
+                options for marine and terrestrial conservation.</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Sustainable-Financing-for-Conservation-in-Africa.png"
+                alt="Session Speakers">
+        </div>
 
-    const day1_8 = new Date(1632321000000);
-    const day_1_8 = day1_8.getHours() + ":" + day1_8.getMinutes();
-    document.getElementById("day1.8").innerHTML = day_1_8;
+        <!-- CHILD ACCORDION 6 -->
+        <button class="childaccordion ">Breakout room 6: Ellen DeGeneres Campus of the Dian Fossey Gorilla Fund in
+            Rwanda</button>
+        <div class="childpanel">
+            <p>This session will give key insights into the development of the new Dian Fossey campus, including looking
+                at the sustainability of the campus, the importance of collaboration and partnerships and the potential
+                positive impact on conservation.</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Exproling-the-New-Ellen-Degeneres-Campus.png"
+                alt="Session Speakers">
+        </div>
 
-    const day2_1 = new Date(1632396600000);
-    const day_2_1 = day2_1.getHours() + ":" + day2_1.getMinutes();
-    document.getElementById("day2.1").innerHTML = day_2_1;
+        <!-- CHILD ACCORDION 7 -->
+        <button class="childaccordion ">Breakout room 7: Communities and the wildlife economy</button>
+        <div class="childpanel">
+            <p>This important hot topic session will look at the role of local communities in the wildlife economy and
+                how they can be empowered to engage in, and benefit from, the wildlife economy. Lessons learned from 15
+                years of the Rwanda Tourism Revenue Sharing programme will be presented, as well as community
+                conservancy examples from Kenya, Madagascar and Zimbabwe.</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Communities-and-the-Wildlife-Economy.png"
+                alt="Session Speakers">
+        </div>
 
-    const day2_2 = new Date(1632397500000);
-    const day_2_2 = day2_2.getHours() + ":" + day2_2.getMinutes();
-    document.getElementById("day2.2").innerHTML = day_2_2;
+        <!-- CHILD ACCORDION 8 -->
+        <button class="childaccordion ">Breakout room 8: Innovations in Conservation Enterprise</button>
+        <div class="childpanel">
+            <p>Innovative conservation enterprises across Africa are attracting new funding, generating new employment
+                opportunities, and promoting conservation through responsible management and use. In this session, we
+                explore a few innovations and consider whether these are sustainable, scalable, and replicable, such as
+                wildlife-friendly enterprises and market-based schemes to pay for ecosystem services. </p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Innovations-in-Conservation-Enterprise.png"
+                alt="Session Speakers">
+        </div>
+
+        <!-- CHILD ACCORDION 9 -->
+        <button class="childaccordion ">Breakout room 9: COVID and the impact on the wildlife economy: lessons
+            learned</button>
+        <div class="childpanel">
+            <p>This hot topic session will bring together key experts to discuss the impacts of COVID-19 on wildlife
+                economy activities, such as tourism, as well as the impacts on conservation in relation to this. The
+                importance of collaboration, sharing learnings and lessons from previous shocks, such as Ebola, and the
+                need for innovation will also be discussed. </p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Covid-19-and-The-Impact-on-The-Wildlife-Economy.png"
+                alt="Session Speakers">
+        </div>
+
+        <!-- CHILD ACCORDION 10 -->
+        <button class="childaccordion ">Breakout room 10: BUILDING FORWARD BETTER Towards a Carbon Neutral, Equitable
+            and Nature Positive Africa</button>
+        <div class="childpanel">
+            <p>Although the COVID-19 pandemic undoubtedly presents one of the most significant challenges to humanity
+                over the last century, our anticipated recovery has opened a unique window of opportunity. This
+                interactive session, presented by WWF, the Boston Consulting Group, in association with the East Africa
+                Community, will debate a recent analysis of concrete economic and business opportunities arising from
+                policies and investments in green and equitable development that will set the continent on a path to
+                ‘Building Forward Better’.</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Building-Forward-Better-Towards-a-Carbon-Neutral.png"
+                alt="Session Speakers">
+        </div>
+
+    </div>
+
+    <!-- DAY 1 SESSION 7 END OF DAY 1 -->
+    <!-- parent accordion -->
+    <button class="accordion">
+        <b>Daily Debrief | Time: <p class="time" id="day1.7"></p></b>
+    </button>
+    <div class="panel">
+        <p>An opportunity for reflection on learnings from the day, connect them with the objectives of the day and the
+            theme of the conference.</p>
+    </div>
 
 
-    const day2_3 = new Date(1632400200000);
-    const day_2_3 = day2_3.getHours() + ":" + day2_3.getMinutes();
-    document.getElementById("day2.3").innerHTML = day_2_3;
+    <h4>Day 2</h4>
+
+    <!-- DAY 2 SESSION 1 -->
+    <!-- parent accordion -->
+    <button class="accordion">
+        <b>Check-in and Day 2 Opening | Time: <p class="time" id="day2.1"></p></b>
+    </button>
+    <div class="panel">
+        <p>Connect with members of the conservation community by sharing conference highlights, reflect on learnings
+            from the previous day through a fun kahoot quiz, and align our focus for the day.</p>
+    </div>
+
+    <!-- DAY 2 SESSION 2 -->
+    <!-- PARENT ACCORDION -->
+    <button class="accordion">
+        <b>‘Big 5’ Wildlife Economy Activity Workshops | Time: <p class="time" id="day2.2"></p></b>
+    </button>
+    <!-- ACCORDION CONTENT -->
+    <div class="panel">
+        <!-- ABOUT PARENT ACCORDION SESSION -->
+        <p>Dive deeper into building resilient wildlife economies by choosing one of several parallel sessions on the
+            Big 5 Wildlife Economy Activities including:</p>
+        <!-- CHILD ACCORDION 1 -->
+        <button class="childaccordion ">Ecotourism</button>
+        <div class="childpanel">
+            <p>How to unlock regional and domestic tourism in Africa</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Eco-Tourism-speakers.png"
+                alt="Session Speakers">
+        </div>
+        <!-- CHILD ACCORDION 2 -->
+        <button class="childaccordion ">Hunting</button>
+        <div class="childpanel">
+            <p>Moving beyond polarized perspectives on trophy hunting; knowns and unknowns on the role of hunting /
+                Building the evidence base</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Hunting-speakers.png"
+                alt="Session Speakers">
+        </div>
+
+        <!-- CHILD ACCORDION 3 -->
+        <button class="childaccordion ">Carbon Market</button>
+        <div class="childpanel">
+            <p>Organised by Conservation International. Carbon finance opportunity of nature-based solutions; an
+                investor’s perspective and government and REDD+ nesting and why it is important .</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Carbon-Market-speakers.png"
+                alt="Session Speakers">
+        </div>
+
+        <!-- CHILD ACCORDION 4 -->
+        <button class="childaccordion ">Forest Products</button>
+        <div class="childpanel">
+            <p>The value of forest products, the challenges with them and the opportunities available in terms of
+                growing this sector</p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Forest-Products-speakers.png"
+                alt="Session Speakers">
+        </div>
+
+        <!-- CHILD ACCORDION 5 -->
+        <button class="childaccordion ">Wildlife Ranching</button>
+        <div class="childpanel">
+            <p>'Game meat’ and the ‘Interface of Science and Business’ </p>
+            <img class="speakers"
+                src="https://sowc.alueducation.com/wp-content/uploads/sites/3/2021/09/Wildlife-Ranching-speakers.png"
+                alt="Session Speakers">
+        </div>
+    </div>
+
+    <button class="accordion"><b>Break | Time: <p class="time" id="day2.3"></p></b></button>
+    <div class="panel">
+    </div>
+
+    <button class="accordion"><b>SOWC/LHI/WWF Incubator Demo Day Pitches | Time: <p class="time" id="day2.4"></p>
+        </b></button>
+    <div class="panel">
+        <p>The African Leadership University Incubator Programme Fellows will be showcasing their ventures and ideas
+            within wildlife conservation, with a goal of connecting with potential investors and mentors. SOWC launched
+            an Incubator programme designed to support high-potential entrepreneurs with innovative ideas for
+            sustainable conservation ventures. In this first cohort, the incubator is focused on entrepreneurs in the
+            idea-stage with innovative ideas for generating income in the wildlife and conservation sector beyond
+            tourism.</p>
+    </div>
 
 
-    const day2_4 = new Date(1632400800000);
-    const day_2_4 = day2_4.getHours() + ":" + day2_4.getMinutes();
-    document.getElementById("day2.4").innerHTML = day_2_4;
+    <button class="accordion"><b>Break | Time: <p class="time" id="day2.5"></p></b></button>
+    <div class="panel">
+    </div>
 
-    const day2_5 = new Date(1632403200000);
-    const day_2_5 = day2_5.getHours() + ":" + day2_5.getMinutes();
-    document.getElementById("day2.5").innerHTML = day_2_5;
+    <button class="accordion"><b>Collective Impact Plenary /Closing Fireside chat/Closing Celebration | Time: <p
+                class="time" id="day2.6"></p></b></button>
+    <div class="panel">
+        <p>An uplifting performance from ALU students, an update on the School of Wildlife Conservation wildlife economy
+            research outputs and upcoming projects, followed by an exciting and inspiring Fireside Chat with surprise
+            guest speakers. Engage in a closing reflection on the two-day experience, and commit to a practice that you
+            can apply to your own organization or policies. We will then end with a vibrant virtual party</p>
+    </div>
 
 
-    const day2_6 = new Date(1632404400000);
-    const day_2_6 = day2_6.getHours() + ":" + day2_6.getMinutes();
-    document.getElementById("day2.6").innerHTML = day_2_6;
+
+    <script>
+        // accordion
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+        // childaccordions
+        var childacc = document.getElementsByClassName("childaccordion");
+        var j;
+
+        for (j = 0; j < childacc.length; j++) {
+            childacc[j].addEventListener("click", function () {
+                this.classList.toggle("activechild");
+                var childpanel = this.nextElementSibling;
+                if (childpanel.style.display === "block") {
+                    childpanel.style.display = "none";
+                } else {
+                    childpanel.style.display = "block";
+                }
+            });
+        }
 
 
-    const day2_7 = new Date(1632407100000);
-    const day_2_7 = day2_7.getHours() + ":" + day2_7.getMinutes();
-    document.getElementById("day2.7").innerHTML = day_2_7;
-</script>
-</body>
+        // DAY 1 USING ARRAYS
+        var day1 = [];
+        var dateObject1 = [];
 
-</html>
+        dateObject1[0] = new Date(1632310200000);
+        day1[0] = (dateObject1[0].getHours() + ":" + dateObject1[0].getMinutes());
+        document.getElementById("day1.1").innerHTML = day1[0];
+
+        dateObject1[1] = new Date(1632311100000);
+        day1[1] = dateObject1[1].getHours() + ":" + dateObject1[1].getMinutes();
+        document.getElementById("day1.2").innerHTML = day1[1];
+
+        dateObject1[2] = new Date(1632313800000);
+        day1[2] = dateObject1[2].getHours() + ":" + dateObject1[2].getMinutes();
+        document.getElementById("day1.3").innerHTML = day1[2];
+
+        dateObject1[3] = new Date(1632314400000);
+        day1[3] = dateObject1[3].getHours() + ":" + dateObject1[3].getMinutes();
+        document.getElementById("day1.4").innerHTML = day1[3];
+
+        dateObject1[4] = new Date(1632317400000);
+        day1[4] = dateObject1[4].getHours() + ":" + dateObject1[4].getMinutes();
+        document.getElementById("day1.5").innerHTML = day1[4];
+
+        dateObject1[5] = new Date(1632318000000);
+        day1[5] = dateObject1[5].getHours() + ":" + dateObject1[5].getMinutes();
+        document.getElementById("day1.6").innerHTML = day1[5];
+
+        dateObject1[6] = new Date(1632320100000);
+        day1[6] = dateObject1[6].getHours() + ":" + dateObject1[6].getMinutes();
+        document.getElementById("day1.7").innerHTML = day1[6];
+
+        // UNUSED TIMES(may cause an eror)
+        // dateObject1[7] = new Date(1632321000000);
+        // day1[7] = dateObject1[7].getHours() + ":" + dateObject1[7].getMinutes();
+        // document.getElementById("day1.8").innerHTML = day1[7];
+
+        // dateObject1[8] = new Date(1632321000000);
+        // day1[8] = dateObject1[8].getHours() + ":" + dateObject1[8].getMinutes();
+        // document.getElementById("day1.9").innerHTML = day1[8];
+
+
+        // DAY 2 USING ARRAYS
+        var day2 = [];
+        var dateObject2 = [];
+
+        dateObject2[0] = new Date(1632396600000);
+        day2[0] = dateObject1[0].getHours() + ":" + dateObject1[0].getMinutes();
+        document.getElementById("day2.1").innerHTML = day2[0];
+
+
+        dateObject2[1] = new Date(1632397500000);
+        day2[1] = dateObject2[1].getHours() + ":" + dateObject2[1].getMinutes();
+        document.getElementById("day2.2").innerHTML = day2[1];
+
+
+        dateObject2[2] = new Date(1632400200000);
+        day2[2] = dateObject2[2].getHours() + ":" + dateObject2[2].getMinutes();
+        document.getElementById("day2.3").innerHTML = day2[2]
+
+
+        dateObject2[3] = new Date(1632400800000);
+        day2[3] = dateObject2[3].getHours() + ":" + dateObject2[3].getMinutes();
+        document.getElementById("day2.4").innerHTML = day2[3]
+
+        dateObject2[4] = new Date(1632403500000);
+        day2[4] = dateObject2[4].getHours() + ":" + dateObject2[4].getMinutes();
+        document.getElementById("day2.5").innerHTML = day2[4];
+
+
+        dateObject2[5] = new Date(1632404100000);
+        day2[5] = dateObject2[5].getHours() + ":" + dateObject2[5].getMinutes();
+        document.getElementById("day2.6").innerHTML = day2[5];
+
+
+        dateObject2[6] = new Date(1632403200000);
+        day2[6] = dateObject2[6].getHours() + ":" + dateObject2[6].getMinutes();
+        document.getElementById("day2.7").innerHTML = day2[6];
+
+
+        // DAY 1 ORIGINAL CODE BEFORE USING ARRAY
+
+        // const day1_1 = new Date(1632310200000);
+        // const day_1_1 = day1_1.getHours() + ":" + day1_1.getMinutes();
+        // document.getElementById("day1.1").innerHTML = day_1_1;
+
+        // const day1_2 = new Date(1632311100000);
+        // const day_1_2 = day1_2.getHours() + ":" + day1_2.getMinutes();
+        // document.getElementById("day1.2").innerHTML = day_1_2;
+
+        // const day1_3 = new Date(1632313800000);
+        // const day_1_3 = day1_3.getHours() + ":" + day1_3.getMinutes();
+        // document.getElementById("day1.3").innerHTML = day_1_3;
+
+        // const day1_4 = new Date(1632314400000);
+        // const day_1_4 = day1_4.getHours() + ":" + day1_4.getMinutes();
+        // document.getElementById("day1.4").innerHTML = day_1_4;
+
+        // const day1_5 = new Date(1632317400000);
+        // const day_1_5 = day1_5.getHours() + ":" + day1_5.getMinutes();
+        // document.getElementById("day1.5").innerHTML = day_1_5;
+
+        // const day1_6 = new Date(1632318000000);
+        // const day_1_6 = day1_6.getHours() + ":" + day1_6.getMinutes();
+        // document.getElementById("day1.6").innerHTML = day_1_6;
+
+        // const day1_7 = new Date(1632320100000);
+        // const day_1_7 = day1_7.getHours() + ":" + day1_7.getMinutes();
+        // document.getElementById("day1.7").innerHTML = day_1_7;
+
+        // const day1_8 = new Date(1632321000000);
+        // const day_1_8 = day1_8.getHours() + ":" + day1_8.getMinutes();
+        // document.getElementById("day1.8").innerHTML = day_1_8;
+
+
+
+        // DAY 2
+        // ORIGINAL DAY2 CODE
+        // const day2_1 = new Date(1632396600000);
+        // const day_2_1 = day2_1.getHours() + ":" + day2_1.getMinutes();
+        // document.getElementById("day2.1").innerHTML = day_2_1;
+
+
+        // const day2_2 = new Date(1632397500000);
+        // const day_2_2 = day2_2.getHours() + ":" + day2_2.getMinutes();
+        // document.getElementById("day2.2").innerHTML = day_2_2;
+
+
+        // const day2_3 = new Date(1632400200000);
+        // const day_2_3 = day2_3.getHours() + ":" + day2_3.getMinutes();
+        // document.getElementById("day2.3").innerHTML = day_2_3;
+
+
+        // const day2_4 = new Date(1632400800000);
+        // const day_2_4 = day2_4.getHours() + ":" + day2_4.getMinutes();
+        // document.getElementById("day2.4").innerHTML = day_2_4;
+
+        // const day2_5 = new Date(1632403200000);
+        // const day_2_5 = day2_5.getHours() + ":" + day2_5.getMinutes();
+        // document.getElementById("day2.5").innerHTML = day_2_5;
+
+
+        // const day2_6 = new Date(1632404400000);
+        // const day_2_6 = day2_6.getHours() + ":" + day2_6.getMinutes();
+        // document.getElementById("day2.6").innerHTML = day_2_6;
+
+
+        // const day2_7 = new Date(1632407100000);
+        // const day_2_7 = day2_7.getHours() + ":" + day2_7.getMinutes();
+        // document.getElementById("day2.7").innerHTML = day_2_7;
+    </script>
